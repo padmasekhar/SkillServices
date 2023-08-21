@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: skill-service-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: skillcentral.com
+      http:
+        paths:
+          - path: /api/skillservice
+            pathType: Prefix
+            backend:
+              service:
+                name: skill-service-svc
+                port:
+                  number: 80
